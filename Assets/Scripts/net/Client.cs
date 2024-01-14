@@ -76,7 +76,7 @@ public class Client : MonoBehaviour
         {
             if (cmd == NetworkEvent.Type.Connect)
             {
-                //Send to sever(net NetWelcome());
+                SendToServer(new NetWelcome());
                 Debug.Log("Welcome, we are connected");
             }
             else if (cmd == NetworkEvent.Type.Data)
@@ -85,7 +85,7 @@ public class Client : MonoBehaviour
             }
             else if (cmd == NetworkEvent.Type.Disconnect)
             {
-                Debug.Log("Client got disconnected from server");
+                Instance.GetComponentInParent<GameUI>().ChangeCamera(0);
                 connection = default(NetworkConnection);
                 connectionDropped?.Invoke();
                 ShutDown();
